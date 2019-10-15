@@ -1,5 +1,14 @@
 <template>
   <div class="question">
+    <!-- Suivi des question valider -->
+    <b-form-radio-group
+      v-model="index"
+      :options="sd_nav"
+      buttons
+      name="radio-btn-outline">
+    </b-form-radio-group>
+
+    <!-- Form question -->
     <form-question
     :enunciate="questions[index].enunciate"
     :answers="questions[index].answers"
@@ -14,14 +23,15 @@ import formQuestion from '@/components/formQuestion.vue'
 
 export default {
   name: 'question',
+  components: {
+    formQuestion
+  },
   data () {
     return {
       index: 0,
-      questions: []
+      questions: [],
+      sd_nav: []
     }
-  },
-  components: {
-    formQuestion
   },
   created: function () {
     this.fetchData()
@@ -32,11 +42,18 @@ export default {
     },
     fetchData: function () {
       var data = require('../assets/questions.json')
-      for (let i = data.length; i > 0; i--) {
+      let len = data.length
+      for (let i = len; i > 0; i--) {
         let randomIndex = Math.floor(Math.random() * i)
         this.questions[i - 1] = data[randomIndex]
         data.splice(randomIndex, 1)
+        this.sd_nav.push({
+          'text': i,
+          'value': i - 1,
+          'button-variant': 'success'
+        })
       }
+      this.sd_nav.reverse()
     }
   }
 }
