@@ -1,0 +1,18 @@
+[
+	{
+		"question": "Qui est-il ?",
+	  	"answers":[
+			'Toggle this custom radio',
+			'Toggle this custom radio',
+			'Toggle this custom radio'
+	  	]
+	},
+	{
+		"question": "Qui est-il2 ?",
+	  	"answers":[
+			'Toggle this custom radio2',
+			'Toggle this custom radio2',
+			'Toggle this custom radio2'
+	  	]
+	}
+]
