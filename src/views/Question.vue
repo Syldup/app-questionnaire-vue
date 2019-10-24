@@ -1,5 +1,11 @@
+<!-- Réaliser le 18/10/2019 -->
+
 <template>
   <div class="question">
+    <div
+      class="header-image"
+      style="background-image: url('img/neon2.jpg')"
+    ></div>
     <!-- Suivi des question valider -->
     <b-form-radio-group
       v-model="index"
@@ -10,10 +16,10 @@
 
     <!-- Form question -->
     <form-question
-    :enunciate="questions[index].enunciate"
-    :answers="questions[index].answers"
-    :options="questions[index].options"
-    @next="next"
+      :enunciate="questions[index].enunciate"
+      :answers="questions[index].answers"
+      :options="questions[index].options"
+      @next="next"
     />
   </div>
 </template>
@@ -58,3 +64,25 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .question {
+    /*display: grid;
+    grid-template-columns: 1fr 320px 1fr;
+    background-color: #000;*/
+  }
+  .carte {
+    grid-column: 2;
+    display: grid;
+    grid-template-rows: .6fr auto 1fr repeat(3, auto) 1fr auto 2fr;
+  }
+  .form-group {
+    margin: 10px 0;
+  }
+  .btn.submit {
+    font-size: .9em;
+    padding: 12px;
+    color: #fff !important;
+    height: 44px;
+  }
+</style>

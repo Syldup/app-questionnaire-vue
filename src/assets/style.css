@@ -1,0 +1,17 @@
+
+.filter {
+  min-height: 100vh;
+  max-height: 999px;
+  background: #4442;
+  background: -webkit-gradient(linear,left bottom,left top,from(#4442),to(#007bff40));
+  background: linear-gradient(0deg,#4442,#007bff40);
+}
+
+.header-image {
+  position: absolute;
+  background-size: cover;
+  background-position: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}

@@ -1,19 +1,18 @@
 <template>
-  <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue App"/> -->
-    Hi
+  <div class="home filter">
+    <div
+      class="header-image"
+      style="background-image: url('img/bg_login.jpg')"
+    ></div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'home'
-  // components: {
-  //   HelloWorld
-  // }
+  name: 'home',
+  bodyClass: 'home',
+  created: function () {
+    this.$router.push({ name: 'login' })
+  }
 }
 </script>
