@@ -1,88 +1,72 @@
 <!-- Réaliser le 18/10/2019 -->
 
 <template>
-  <div class="question">
-    <div
-      class="header-image"
-      style="background-image: url('img/neon2.jpg')"
-    ></div>
-    <!-- Suivi des question valider -->
-    <b-form-radio-group
-      v-model="index"
-      :options="sd_nav"
-      buttons
-      name="radio-btn-outline">
-    </b-form-radio-group>
+  <carte
+    sd-type="question"
+    sd-bg-image="url('img/neon2.jpg')"
+  >
+    <img slot="bHeader" alt="EEV Logo" src="img/logoEEV_214x140.png">
 
-    <!-- Form question -->
-    <form-question
-      :enunciate="questions[index].enunciate"
-      :answers="questions[index].answers"
-      :options="questions[index].options"
-      @next="next"
+    <form-question v-if="sdIndex >= 0 && sdIndex < max"
+      :sd-enunciate="sdQuestions[sdIndex].enunciate"
+      :sd-answers="sdQuestions[sdIndex].answers"
+      :sd-options="sdQuestions[sdIndex].options"
+      @sd-next="sdNext"
     />
-  </div>
+    <div v-if="sdIndex < 0">
+    <h3 class="text-white">Tests de sécurité</h3>
+      <p class="text-white">
+        Il est important que vous répondiez le plus sincèrement possible aux question.
+      </p>
+      <b-button
+      class="px-5 rounded-pill justify-content-center"
+      type="button" variant="primary"
+      @click="sdInitQuestions">Lancer le questionnaire</b-button>
+    </div>
+
+    <div slot="bFooter">
+      <strong v-if="sdIndex > -1 " class="text-white rounded-top bg-dark py-1 px-2">{{ sdIndex }} / {{ max }}</strong>
+      <b-progress slot="bFooter" class="rounded-pill" :value="sdIndex" :max="max" animated>
+      </b-progress>
+    </div>
+  </carte>
 </template>
 
 <script>
 import formQuestion from '@/components/formQuestion.vue'
+import Carte from '@/components/carte.vue'
 
 export default {
   name: 'question',
   components: {
+    Carte,
     formQuestion
   },
   data () {
     return {
-      index: 0,
-      questions: [],
-      sd_nav: []
+      sdIndex: -1,
+      sdQuestions: []
     }
   },
-  created: function () {
-    this.fetchData()
+  computed: {
+    max () {
+      return this.sdQuestions.length
+    }
   },
   methods: {
-    next: function (selected) {
-      this.index++
+    sdNext: function (selected) {
+      this.sdIndex++
     },
-    fetchData: function () {
-      var data = require('../assets/questions.json')
-      let len = data.length
-      for (let i = len; i > 0; i--) {
-        let randomIndex = Math.floor(Math.random() * i)
-        this.questions[i - 1] = data[randomIndex]
-        data.splice(randomIndex, 1)
-        this.sd_nav.push({
-          'text': i,
-          'value': i - 1,
-          'button-variant': 'success'
-        })
+    sdInitQuestions: function () {
+      var sdData = require('../assets/questions.json')
+      let sdLen = sdData.length
+      for (let i = sdLen; i > 0; i--) {
+        let sdRandomIndex = Math.floor(Math.random() * i)
+        this.sdQuestions.push(sdData[sdRandomIndex])
+        sdData.splice(sdRandomIndex, 1)
       }
-      this.sd_nav.reverse()
+      this.sdIndex = 0
     }
   }
 }
 </script>
-
-<style lang="scss">
-  .question {
-    /*display: grid;
-    grid-template-columns: 1fr 320px 1fr;
-    background-color: #000;*/
-  }
-  .carte {
-    grid-column: 2;
-    display: grid;
-    grid-template-rows: .6fr auto 1fr repeat(3, auto) 1fr auto 2fr;
-  }
-  .form-group {
-    margin: 10px 0;
-  }
-  .btn.submit {
-    font-size: .9em;
-    padding: 12px;
-    color: #fff !important;
-    height: 44px;
-  }
-</style>

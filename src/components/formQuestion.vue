@@ -1,55 +1,49 @@
+<!-- Réaliser le 18/10/2019 -->
+
 <template>
   <div class="form-question">
-    <b-form-group :label="c_enunciate" label-size="lg">
-      <b-form-radio-group
-        v-model="selected"
-        :options="c_answers"
-        size="lg" buttons
-        button-variant="outline-info"
-        :stacked="c_options.name == 'radio-btn-stacked'"
-        :name="c_options.name">
-      </b-form-radio-group>
-    </b-form-group>
-
+    <h3 class="text-white">{{ sdEnunciate }}</h3>
+    <b-form-radio-group
+      class="my-5 rounded bg-dark"
+      v-model="sdSelected"
+      :options="sdAnswers"
+      size="lg" buttons
+      :button-variant="csdOptions.buttonVariant"
+      :stacked="csdOptions.stacked"
+      :name="csdOptions.name">
+    </b-form-radio-group>
+    <br/>
     <b-button
+      class="px-5 rounded-pill justify-content-center"
       type="button" variant="primary"
-      :disabled="selected == 0"
-      @click="next">Suivant</b-button>
+      :disabled="sdSelected == 0"
+      @click="sdNext">Suivant</b-button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'form-question',
-  props: ['enunciate', 'answers', 'options'],
+  props: ['sdEnunciate', 'sdAnswers', 'sdOptions'],
   data () {
     return {
-      selected: 0
+      sdSelected: 0
     }
   },
   computed: {
-    c_enunciate: function () {
-      return this.enunciate
-    },
-    c_answers: function () {
-      return this.answers
-    },
-    c_options: function () {
+    csdOptions: function () {
       return Object.assign({
-        name: 'radio-btn-stacked'
-      }, this.options)
+        name: 'radio-btn-stacked',
+        stacked: true,
+        buttonVariant: 'outline-light'
+      }, this.sdOptions)
     }
   },
   methods: {
-    next () {
-      this.$emit('next', this.selected)
-      this.selected = 0
+    sdNext () {
+      this.$emit('sd-next', this.sdSelected)
+      this.sdSelected = 0
     }
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-
-</style>

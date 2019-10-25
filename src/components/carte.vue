@@ -2,7 +2,6 @@
 
 <template>
   <div class="carte" :class="sdType">
-
     <slot name="background">
       <!-- Background de la page -->
       <div v-if="sdBgImage"
@@ -65,8 +64,9 @@ export default {
     z-index: -1;
   }
   .carte {
+    min-height: 100vh;
     display: grid;
-    grid-template: auto 1fr auto / 1fr 320px 1fr;
+    grid-template: auto 1fr auto / 1fr minmax(320px, 1fr) 1fr;
     grid-template-areas:
       "  hd   hd    hd"
       "left bande right"

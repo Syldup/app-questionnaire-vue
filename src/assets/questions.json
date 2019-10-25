@@ -58,7 +58,8 @@
 		{"text": "5", "value":5}
 	],
 	"options": {
-		"name": "radio-btn-outline"
+		"name": "radio-btn-outline",
+		"stacked": false
 	}
 },
 {
@@ -87,7 +88,8 @@
 		{"text": "5", "value":5}
 	],
 	"options": {
-		"name": "radio-btn-outline"
+		"name": "radio-btn-outline",
+		"stacked": false
 	}
 },
 {

@@ -5,7 +5,7 @@
     sd-type="login filter"
     sd-bg-image="url('img/bg_login.jpg')"
   >
-    <img slot="bHeader" alt="EEV Logo" src="img/logoEEV.png">
+    <img slot="bHeader" alt="EEV Logo" src="img/logoEEV_320x209.png">
 
     <div>
       <fg-input
@@ -27,9 +27,9 @@
       ></fg-input>
     </div>
 
-    <a slot="bFooter" @click="onSubmit"
+    <a slot="bFooter" @click="sdOnSubmit"
       class="submit btn btn-primary btn-round btn-lg btn-block rounded-pill"
-      :class="{ 'disabled': notValide }">Commencer le test</a>
+      :class="{ 'disabled': sdNotValide }">Commencer le test</a>
   </carte>
 </template>
 
@@ -52,12 +52,12 @@ export default {
   },
   computed: {
     // Formulaire invalide
-    notValide () {
+    sdNotValide () {
       return (this.sdFirstname === '' || this.sdLastname === '' || this.sdSociety === '')
     }
   },
   methods: {
-    onSubmit () {
+    sdOnSubmit () {
       this.$router.push({ name: 'question' })
     }
   }
@@ -65,10 +65,13 @@ export default {
 </script>
 
 <style lang="scss">
-  .form-group {
+  .login {
+    grid-template-columns: 1fr 320px 1fr;
+  }
+  .login .form-group {
     margin: 10px 0;
   }
-  .btn.submit {
+  .login .btn.submit {
     font-size: .9em;
     padding: 12px;
     color: #fff !important;

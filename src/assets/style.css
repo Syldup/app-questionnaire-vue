@@ -1,7 +1,5 @@
 
 .filter {
-  min-height: 100vh;
-  max-height: 999px;
   background: #4442;
   background: -webkit-gradient(linear,left bottom,left top,from(#4442),to(#007bff40));
   background: linear-gradient(0deg,#4442,#007bff40);
