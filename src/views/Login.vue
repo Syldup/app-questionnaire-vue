@@ -50,6 +50,11 @@ export default {
       sdSociety: ''
     }
   },
+  mounted () {
+    if (localStorage.sdFirstname) this.sdFirstname = localStorage.sdFirstname
+    if (localStorage.sdLastname) this.sdLastname = localStorage.sdLastname
+    if (localStorage.sdSociety) this.sdSociety = localStorage.sdSociety
+  },
   computed: {
     // Formulaire invalide
     sdNotValide () {
@@ -58,6 +63,9 @@ export default {
   },
   methods: {
     sdOnSubmit () {
+      localStorage.sdFirstname = this.sdFirstname
+      localStorage.sdLastname = this.sdLastname
+      localStorage.sdSociety = this.sdSociety
       this.$router.push({ name: 'question' })
     }
   }

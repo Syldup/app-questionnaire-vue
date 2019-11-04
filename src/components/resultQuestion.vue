@@ -66,6 +66,7 @@ export default {
       if (this.sdPourcentage < 50) {
         this.$emit('sd-restart')
       } else {
+        localStorage.testDone = 'true'
         this.$router.push({ name: 'home' })
       }
     }

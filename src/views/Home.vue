@@ -1,19 +1,37 @@
 <template>
-  <div class="home filter">
-    <div
-      class="header-image"
-      style="background-image: url('img/bg_login.jpg')"
-    ></div>
-  </div>
+  <carte
+    sd-type="home filter"
+    sd-bg-image="url('img/bg_login.jpg')"
+  >
+    <b-button slot="bFooter"
+        class="px-5 rounded-pill justify-content-center"
+        type="button" variant="primary"
+        @click="sdOnSubmit">
+        Déconnection
+      </b-button>
+  </carte>
 </template>
 
 <script>
+import Carte from '@/components/carte.vue'
+
 export default {
   name: 'home',
   bodyClass: 'home',
+  components: {
+    Carte
+  },
   created () {
     // rediriger vers la page d'autentification si non identifier
-    this.$router.push({ name: 'login' })
+    if (localStorage.testDone !== 'true') {
+      this.$router.push({ name: 'login' })
+    }
+  },
+  methods: {
+    sdOnSubmit () {
+      localStorage.clear()
+      this.$router.push({ name: 'login' })
+    }
   }
 }
 </script>

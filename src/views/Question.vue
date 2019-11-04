@@ -54,7 +54,15 @@ export default {
     return {
       sdIndex: -1,
       sdQuestions: [],
-      sdAnswers: []
+      sdAnswers: [],
+      sdShuffleQ: true,
+      sdNbMaxQ: -1
+    }
+  },
+  created () {
+    // rediriger vers la page d'autentification si le formulaire est incomplet
+    if (!localStorage.sdFirstname || !localStorage.sdLastname || !localStorage.sdSociety) {
+      this.$router.push({ name: 'login' })
     }
   },
   computed: {
@@ -78,9 +86,12 @@ export default {
     sdInitQuestions () {
       var sdData = [...this.sdData]
       console.log(sdData)
-      let sdLen = sdData.length
+      let sdLen = this.sdNbMaxQ
+      if (this.sdNbMaxQ < 0 || sdData.length < this.sdNbMaxQ) {
+        sdLen = sdData.length
+      }
       for (let i = sdLen; i > 0; i--) {
-        let sdRandomIndex = Math.floor(Math.random() * i)
+        let sdRandomIndex = this.sdShuffleQ ? Math.floor(Math.random() * i) : i - 1
         this.sdQuestions.push(sdData[sdRandomIndex])
         sdData.splice(sdRandomIndex, 1)
       }
