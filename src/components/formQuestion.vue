@@ -16,7 +16,7 @@
     <b-button
       class="px-5 rounded-pill justify-content-center"
       type="button" variant="primary"
-      :disabled="sdSelected == 0"
+      :disabled="sdSelected == -1"
       @click="sdNext">Suivant</b-button>
   </div>
 </template>
@@ -24,14 +24,18 @@
 <script>
 export default {
   name: 'form-question',
-  props: ['sdEnunciate', 'sdAnswers', 'sdOptions'],
+  props: {
+    sdEnunciate: String,
+    sdAnswers: Array,
+    sdOptions: Object
+  },
   data () {
     return {
-      sdSelected: 0
+      sdSelected: -1
     }
   },
   computed: {
-    csdOptions: function () {
+    csdOptions () {
       return Object.assign({
         name: 'radio-btn-stacked',
         stacked: true,
@@ -42,7 +46,7 @@ export default {
   methods: {
     sdNext () {
       this.$emit('sd-next', this.sdSelected)
-      this.sdSelected = 0
+      this.sdSelected = -1
     }
   }
 }

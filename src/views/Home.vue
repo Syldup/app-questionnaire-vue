@@ -11,7 +11,7 @@
 export default {
   name: 'home',
   bodyClass: 'home',
-  created: function () {
+  created () {
     this.$router.push({ name: 'login' })
   }
 }

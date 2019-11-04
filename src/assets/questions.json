@@ -1,51 +1,51 @@
 [{
 	"enunciate": "Vous considère-t-on comme quelqu’un sachant garder son sang-froid en toutes circonstances ?",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
 		{"text": "Vrai", "value":2},
-		{"text": "Faux", "value":3}
+		{"text": "Faux", "value":0},
+		{"text": "Ne sait pas", "value":1}
 	]
 },
 {
 	"enunciate": "Que ressentez-vous, coincé(e) dans un embouteillage ?",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
-		{"text": "de la frustration", "value":2},
-		{"text": "de la colère", "value":3},
-		{"text": "de l’ennui", "value":4}
+		{"text": "de la frustration", "value":1},
+		{"text": "de la colère", "value":0},
+		{"text": "de l’ennui", "value":4},
+		{"text": "Ne sait pas", "value":3}
 	]
 },
 {
 	"enunciate": "Je suis très contrarié(e) si je suis interrompu(e) dans mon travail.",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
-		{"text": "Oui", "value":2},
-		{"text": "Non", "value":3}
+		{"text": "Oui", "value":0},
+		{"text": "Non", "value":2},
+		{"text": "Ne sait pas", "value":1}
 	]
 },
 {
 	"enunciate": "Choisissez l’action qui vous décrit le mieux :",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
-		{"text": "Organiser", "value":2},
-		{"text": "Agir", "value":3},
-		{"text": "Ranger", "value":4}
+		{"text": "Organiser", "value":3},
+		{"text": "Agir", "value":0},
+		{"text": "Ranger", "value":2},
+		{"text": "Ne sait pas", "value":1}
 	]
 },
 {
 	"enunciate": "Vous aimez la compétition ?",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
 		{"text": "Oui", "value":2},
-		{"text": "Non", "value":3}
+		{"text": "Non", "value":0},
+		{"text": "Ne sait pas", "value":1}
 	]
 },
 {
 	"enunciate": "J’aime partager mes idées avec mes collègues de travail.",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
 		{"text": "Vrai", "value":2},
-		{"text": "Faux", "value":3}
+		{"text": "Faux", "value":0},
+		{"text": "Ne sait pas", "value":1}
 	]
 },
 {
@@ -53,9 +53,9 @@
 	"answers":[
 		{"text": "1", "value":1},
 		{"text": "2", "value":2},
-		{"text": "3", "value":3},
+		{"text": "3", "value":0},
 		{"text": "4", "value":4},
-		{"text": "5", "value":5}
+		{"text": "5", "value":3}
 	],
 	"options": {
 		"name": "radio-btn-outline",
@@ -65,27 +65,27 @@
 {
 	"enunciate": "Je tiens à respecter mes engagements.",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
 		{"text": "Vrai", "value":2},
-		{"text": "Faux", "value":3}
+		{"text": "Faux", "value":1},
+		{"text": "Ne sait pas", "value":0}
 	]
 },
 {
 	"enunciate": "Vous aimez recevoir des invités.",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
 		{"text": "Vrai", "value":2},
-		{"text": "Faux", "value":3}
+		{"text": "Faux", "value":1},
+		{"text": "Ne sait pas", "value":0}
 	]
 },
 {
 	"enunciate": "Lorsque l’on me démontre que j’ai fait une erreur, cela ne m’affecte pas longtemps.",
 	"answers":[
-		{"text": "1", "value":1},
-		{"text": "2", "value":2},
-		{"text": "3", "value":3},
-		{"text": "4", "value":4},
-		{"text": "5", "value":5}
+		{"text": "1", "value":3},
+		{"text": "2", "value":4},
+		{"text": "3", "value":2},
+		{"text": "4", "value":0},
+		{"text": "5", "value":1}
 	],
 	"options": {
 		"name": "radio-btn-outline",
@@ -95,24 +95,24 @@
 {
 	"enunciate": "À votre avis, est-il préférable de ne pas trop attendre de la vie, pour éviter les déceptions ?",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
-		{"text": "Vrai", "value":2},
-		{"text": "Faux", "value":3}
+		{"text": "Vrai", "value":1},
+		{"text": "Faux", "value":0},
+		{"text": "Ne sait pas", "value":2}
 	]
 },
 {
 	"enunciate": "Vous êtes toujours ponctuel(le) à vos rendez-vous.",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
 		{"text": "Oui", "value":2},
-		{"text": "Non", "value":3}
+		{"text": "Non", "value":0},
+		{"text": "Ne sait pas", "value":1}
 	]
 },
 {
 	"enunciate": "Vous n’avez jamais proféré de jurons. ",
 	"answers":[
-		{"text": "Ne sait pas", "value":1},
-		{"text": "Oui", "value":2},
-		{"text": "Non", "value":3}
+		{"text": "Oui", "value":1},
+		{"text": "Non", "value":0},
+		{"text": "Ne sait pas", "value":2}
 	]
 }]
