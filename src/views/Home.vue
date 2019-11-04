@@ -12,6 +12,7 @@ export default {
   name: 'home',
   bodyClass: 'home',
   created () {
+    // rediriger vers la page d'autentification si non identifier
     this.$router.push({ name: 'login' })
   }
 }
