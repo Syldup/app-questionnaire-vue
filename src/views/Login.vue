@@ -8,6 +8,7 @@
     <img slot="bHeader" alt="EEV Logo" src="img/logoEEV_320x209.png">
 
     <div>
+      <!-- Input du mot de passe admin si admin selected -->
       <fg-input v-if="adminForm"
         type="password"
         addon-icon="flaticon-key"
@@ -15,26 +16,28 @@
         v-model="sdMDP"
       ></fg-input>
 
+      <!-- Sinon Input user -->
       <template v-else>
         <fg-input
           addon-icon="flaticon-name"
           placeholder="Prénom ..."
-          v-model="sdFirstname"
+          v-model="sdUser.sdFirstname"
         ></fg-input>
 
         <fg-input
           addon-icon="flaticon-text"
           placeholder="Nom ..."
-          v-model="sdLastname"
+          v-model="sdUser.sdLastname"
         ></fg-input>
 
         <fg-input
           addon-icon="flaticon-company-1"
           placeholder="Société ..."
-          v-model="sdSociety"
+          v-model="sdUser.sdSociety"
         ></fg-input>
       </template>
 
+      <!-- Checkbox Admin form -->
       <b-form-checkbox
         id="checkbox"
         v-model="adminForm"
@@ -44,14 +47,15 @@
       </b-form-checkbox>
     </div>
 
+    <!-- Bouttons submit -->
     <a v-if="adminForm"
       slot="bFooter" @click="sdOnAuth"
-      class="submit btn btn-primary btn-round btn-lg btn-block rounded-pill"
+      class="submit px-5 btn btn-primary btn-lg rounded-pill"
     > Connection </a>
 
     <a v-else
       slot="bFooter" @click="sdOnSubmit"
-      class="submit btn btn-primary btn-round btn-lg btn-block rounded-pill"
+      class="submit px-5 btn btn-primary btn-lg rounded-pill"
       :class="{ 'disabled': sdNotValide }"
     > Commencer le test </a>
   </carte>
@@ -69,34 +73,38 @@ export default {
   },
   data () {
     return {
-      sdFirstname: '',
-      sdLastname: '',
-      sdSociety: '',
+      sdUser: {
+        sdFirstname: '',
+        sdLastname: '',
+        sdSociety: ''
+      },
       sdMDP: '',
       adminForm: false
     }
   },
   mounted () {
-    if (localStorage.sdFirstname) this.sdFirstname = localStorage.sdFirstname
-    if (localStorage.sdLastname) this.sdLastname = localStorage.sdLastname
-    if (localStorage.sdSociety) this.sdSociety = localStorage.sdSociety
+    if (localStorage.sdUser) {
+      this.sdUser = JSON.parse(localStorage.sdUser)
+    }
   },
   computed: {
     // Formulaire invalide
     sdNotValide () {
-      return (this.sdFirstname === '' || this.sdLastname === '' || this.sdSociety === '')
+      return (
+        this.sdUser.sdFirstname === '' ||
+        this.sdUser.sdLastname === '' ||
+        this.sdUser.sdSociety === ''
+      )
     }
   },
   methods: {
     sdOnSubmit () {
-      localStorage.sdFirstname = this.sdFirstname
-      localStorage.sdLastname = this.sdLastname
-      localStorage.sdSociety = this.sdSociety
+      localStorage.sdUser = JSON.stringify(this.sdUser)
       this.$router.push({ name: 'question' })
     },
     sdOnAuth () {
       if (this.encrypt(this.sdMDP) === 4023166703) {
-        localStorage.testDone = 'admin'
+        localStorage.etat = 'admin'
         this.$router.push({ name: 'admin' })
       }
     },

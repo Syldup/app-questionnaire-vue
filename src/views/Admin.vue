@@ -3,26 +3,26 @@
 <template>
   <carte
     sd-type="admin filter"
-    sd-bg-image="url('img/bg_login.jpg')"
+    sd-bg-image="url('img/neon2.jpg')"
   >
     <img slot="bHeader" alt="EEV Logo" src="img/logoEEV_320x209.png">
 
-    <div>
-      <label for="range" class="text-white">Nombre de question : {{ sdNbMaxQ }}</label>
-      <b-form-input id="range" v-model="sdNbMaxQ" type="range" min="0" :max="max"></b-form-input>
+    <template>
+      <label for="range" class="text-white">Nombre de question : {{ sdOptionQ.sdNbMaxQ }}</label>
+      <b-form-input id="range" v-model="sdOptionQ.sdNbMaxQ" type="range" min="0" :max="max"></b-form-input>
 
       <b-form-checkbox
         id="checkbox"
         type="number"
-        v-model="sdShuffleQ"
+        v-model="sdOptionQ.sdShuffleQ"
         name="checkbox"
         class="text-white"
       > Mélanger les questions
       </b-form-checkbox>
-    </div>
+    </template>
 
     <a slot="bFooter" @click="sdOnSubmit"
-      class="submit btn btn-primary btn-round btn-lg btn-block rounded-pill"
+      class="submit px-5 text-white btn btn-primary btn-lg rounded-pill"
       >Sauvgarder</a>
   </carte>
 </template>
@@ -39,42 +39,39 @@ export default {
   },
   data () {
     return {
-      sdNbMaxQ: -1,
-      sdShuffleQ: true
+      sdOptionQ: {
+        sdNbMaxQ: -1,
+        sdShuffleQ: true
+      }
     }
   },
   created () {
     // rediriger vers la page d'autentification si non admin
-    if (localStorage.testDone !== 'admin') {
+    if (localStorage.etat !== 'admin') {
       this.$router.push({ name: 'login' })
     }
-  },
-  mounted () {
-    if (localStorage.sdNbMaxQ) {
-      this.sdNbMaxQ = localStorage.sdNbMaxQ
-    } else this.sdNbMaxQ = this.max
-    if (localStorage.sdShuffleQ) this.sdShuffleQ = localStorage.sdShuffleQ
+    if (localStorage.sdOptionQ) {
+      this.sdOptionQ = JSON.parse(localStorage.sdOptionQ)
+    } else this.sdOptionQ.sdNbMaxQ = this.max
   },
   computed: {
-    max () {
+    max () { // Nombre max de question
       return require('../assets/questions.json').length
     }
   },
   methods: {
     sdOnSubmit () {
-      localStorage.sdNbMaxQ = this.sdNbMaxQ
-      localStorage.sdShuffleQ = this.sdShuffleQ
-      this.$router.push({ name: 'question' })
+      localStorage.sdOptionQ = JSON.stringify(this.sdOptionQ)
+      this.$router.push({ name: 'login' })
     }
   }
 }
 </script>
 
 <style lang="scss">
-  .admin {
-    grid-template-columns: 1fr 320px 1fr;
-  }
-  .admin .form-group {
-    margin: 10px 0;
+  .admin .bande-main {
+    background-color: #0006;
+    border-radius: 30px;
+    padding: 30px;
   }
 </style>

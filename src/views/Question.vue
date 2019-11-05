@@ -7,8 +7,9 @@
   >
     <img slot="bHeader" alt="EEV Logo" src="img/logoEEV_214x140.png"/>
 
+    <!-- Accueil questionaire -->
     <div v-if="sdIndex < 0">
-    <h3 class="text-white">Tests de sécurité</h3>
+      <h3 class="text-white">Tests de sécurité</h3>
       <p class="text-white">
         Il est important que vous répondiez le plus sincèrement possible aux question.
       </p>
@@ -19,11 +20,15 @@
         Lancer le questionnaire
       </b-button>
     </div>
+
+    <!-- Resulat du questionnaire -->
     <result-question v-else-if="sdIndex >= max"
       :sd-questions="sdQuestions"
       :sd-answers="sdAnswers"
       @sd-restart="sdRestart"
     />
+
+    <!-- Question n°sdIndex -->
     <form-question v-else
       :sd-enunciate="sdQuestions[sdIndex].enunciate"
       :sd-answers="sdQuestions[sdIndex].answers"
@@ -32,7 +37,10 @@
     />
 
     <div slot="bFooter">
-      <strong v-if="sdIndex > -1 " class="text-white rounded-top bg-dark py-1 px-2">{{ sdIndex }} / {{ max }}</strong>
+      <!-- Progresse bar de l'avencement dans le questionnaire -->
+      <strong v-if="sdIndex > -1 " class="text-white rounded-top bg-dark py-1 px-2">
+        {{ sdIndex }} / {{ max }}
+      </strong>
       <b-progress slot="bFooter" class="rounded-pill" :value="sdIndex" :max="max" animated/>
     </div>
   </carte>
@@ -52,22 +60,23 @@ export default {
   },
   data () {
     return {
-      sdIndex: -1,
+      sdIndex: -1, // Avencemant dans le questionnaire
       sdQuestions: [],
       sdAnswers: [],
-      sdShuffleQ: true,
-      sdNbMaxQ: -1
+      sdOptionQ: {
+        sdShuffleQ: true,
+        sdNbMaxQ: -1
+      }
     }
   },
   created () {
     // rediriger vers la page d'autentification si le formulaire est incomplet
-    if (!localStorage.sdFirstname || !localStorage.sdLastname || !localStorage.sdSociety) {
+    if (!localStorage.sdUser) {
       this.$router.push({ name: 'login' })
     }
-    if (localStorage.sdNbMaxQ) {
-      this.sdNbMaxQ = localStorage.sdNbMaxQ
-    } else this.sdIndex = this.sdData.length
-    if (localStorage.sdShuffleQ) this.sdShuffleQ = localStorage.sdShuffleQ
+    if (localStorage.sdOptionQ) {
+      this.sdOptionQ = JSON.parse(localStorage.sdOptionQ)
+    } else this.sdOptionQ.sdNbMaxQ = this.sdData.length
   },
   computed: {
     sdData () {
@@ -79,8 +88,10 @@ export default {
   },
   methods: {
     sdNext (selected) {
-      this.sdIndex++
+      // Ajouter la valeur de la reponce à la list des reponces
       this.sdAnswers.push(selected)
+      // Passer à la question suivante
+      this.sdIndex++
     },
     sdRestart () {
       this.sdQuestions = []
@@ -89,8 +100,8 @@ export default {
     },
     sdInitQuestions () {
       var sdData = [...this.sdData]
-      for (let i = sdData.length; i > 0 && this.max < this.sdNbMaxQ; i--) {
-        let sdRandomIndex = this.sdShuffleQ ? Math.floor(Math.random() * i) : 0
+      for (let i = sdData.length; i > 0 && this.max < this.sdOptionQ.sdNbMaxQ; i--) {
+        let sdRandomIndex = this.sdOptionQ.sdShuffleQ ? Math.floor(Math.random() * i) : 0
         this.sdQuestions.push(sdData[sdRandomIndex])
         sdData.splice(sdRandomIndex, 1)
       }

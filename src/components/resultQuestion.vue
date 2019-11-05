@@ -6,6 +6,7 @@
       Merci d'avoir répondu au questionnaire.<br/>
       Vous avez un taux de réussite de <strong>{{ sdPourcentage }} %</strong> !<br/>
     </p>
+
     <div v-if="sdPourcentage < 50">
       <p class="text-white">
         Malheureusement vous avez moins de <strong>50 %</strong>,<br/>
@@ -18,6 +19,7 @@
         Recommencer le questionnaire
       </b-button>
     </div>
+
     <div v-else>
       <p class="text-white">
         Vous pouvez désormais accéder à notre site web !
@@ -40,7 +42,7 @@ export default {
     sdAnswers: Array
   },
   computed: {
-    sdMaxScord () {
+    sdMaxScord () { // Plus grand scord possible
       if (this.sdQuestions.length === 0) {
         return 1
       }
@@ -48,13 +50,13 @@ export default {
         Math.max(...q.answers.map(a => a.value))
       ).reduce(this.add)
     },
-    sdScord () {
+    sdScord () { // Somme des valeurs des réponces
       if (this.sdAnswers.length === 0) {
         return 0
       }
       return this.sdAnswers.reduce(this.add)
     },
-    sdPourcentage () {
+    sdPourcentage () { // Claclcule du porsentage de bonne reponce
       return Math.round(this.sdScord * 100 / this.sdMaxScord)
     }
   },
@@ -66,7 +68,7 @@ export default {
       if (this.sdPourcentage < 50) {
         this.$emit('sd-restart')
       } else {
-        localStorage.testDone = 'true'
+        localStorage.etat = 'login'
         this.$router.push({ name: 'home' })
       }
     }
