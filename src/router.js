@@ -16,6 +16,11 @@ export default new Router({
       component: () => import('./views/Login.vue')
     },
     {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('./views/Admin.vue')
+    },
+    {
       path: '/questionnaire',
       name: 'question',
       component: () => import('./views/Question.vue')

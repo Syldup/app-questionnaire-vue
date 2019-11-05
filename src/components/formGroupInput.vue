@@ -22,6 +22,7 @@
       </slot>
       <slot>
         <input
+          :type="type"
           :value="value"
           v-on="listeners"
           v-bind="$attrs"
@@ -45,6 +46,10 @@ export default {
     value: {
       type: [String, Number],
       default: ''
+    },
+    type: {
+      type: String,
+      default: 'text'
     },
     addonIcon: String
   },

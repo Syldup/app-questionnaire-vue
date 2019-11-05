@@ -64,6 +64,10 @@ export default {
     if (!localStorage.sdFirstname || !localStorage.sdLastname || !localStorage.sdSociety) {
       this.$router.push({ name: 'login' })
     }
+    if (localStorage.sdNbMaxQ) {
+      this.sdNbMaxQ = localStorage.sdNbMaxQ
+    } else this.sdIndex = this.sdData.length
+    if (localStorage.sdShuffleQ) this.sdShuffleQ = localStorage.sdShuffleQ
   },
   computed: {
     sdData () {
@@ -85,13 +89,8 @@ export default {
     },
     sdInitQuestions () {
       var sdData = [...this.sdData]
-      console.log(sdData)
-      let sdLen = this.sdNbMaxQ
-      if (this.sdNbMaxQ < 0 || sdData.length < this.sdNbMaxQ) {
-        sdLen = sdData.length
-      }
-      for (let i = sdLen; i > 0; i--) {
-        let sdRandomIndex = this.sdShuffleQ ? Math.floor(Math.random() * i) : i - 1
+      for (let i = sdData.length; i > 0 && this.max < this.sdNbMaxQ; i--) {
+        let sdRandomIndex = this.sdShuffleQ ? Math.floor(Math.random() * i) : 0
         this.sdQuestions.push(sdData[sdRandomIndex])
         sdData.splice(sdRandomIndex, 1)
       }
